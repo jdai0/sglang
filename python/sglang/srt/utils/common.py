@@ -3611,6 +3611,8 @@ def mxfp8_block_convert_required():
     """
     import torch
     if not torch.version.hip:
+        if not torch.cuda.is_available():
+            return False
         cap = torch.cuda.get_device_capability()
         if cap[0] < 10:
             return True
